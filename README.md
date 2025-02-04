@@ -18,7 +18,7 @@
 
         /* Estilo para o texto */
         .flag {
-            font-size: 40px;
+            font-size: 30px;
             font-weight: bold;
             color: black;
             text-align: center;
@@ -27,7 +27,7 @@
 </head>
 <body>
     <div class="flag">
-        FLAG{CR1pt0grafia}
+        A mensagem secreta é FLAG{CR1pt0grafia}, um exemplo de codificação!
     </div>
 </body>
 </html>
