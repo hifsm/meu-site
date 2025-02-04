@@ -1,62 +1,31 @@
-# meu-site
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafio GitHub</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+pip install pillow
+from PIL import Image, ImageDraw, ImageFont
 
-        .content {
-            text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+# Cria uma imagem branca (com fundo branco)
+largura, altura = 400, 100  # Defina o tamanho da imagem
+imagem = Image.new('RGB', (largura, altura), color=(255, 255, 255))
 
-        h1 {
-            color: #333;
-        }
+# Cria um objeto para desenhar na imagem
+desenhista = ImageDraw.Draw(imagem)
 
-        .hint {
-            margin-top: 20px;
-            color: #777;
-        }
+# Definindo a fonte (se não tiver a fonte 'arial.ttf', pode usar uma disponível no seu sistema)
+try:
+    fonte = ImageFont.truetype("arial.ttf", 30)  # Você pode ajustar o tamanho da fonte aqui
+except IOError:
+    fonte = ImageFont.load_default()  # Se a fonte não for encontrada, usa uma padrão
 
-        .hint a {
-            color: #007BFF;
-            text-decoration: none;
-        }
+# Texto a ser adicionado
+texto = "FLAG{CR1pt0grafia}"
 
-        .hint a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="content">
-        <h1>Bem-vindo ao Desafio!</h1>
-        <p>Procure pela dica que irá te ajudar a encontrar a resposta!</p>
-        <p class="hint">Dica: Veja com atenção o código-fonte da página...</p>
-    </div>
+# Calcula o tamanho do texto para centralizá-lo
+largura_texto, altura_texto = desenhista.textsize(texto, font=fonte)
+posicao = ((largura - largura_texto) // 2, (altura - altura_texto) // 2)
 
-    <!-- A flag está escondida aqui! -->
-    <!-- flag{BFG} -->
+# Adiciona o texto na imagem
+desenhista.text(posicao, texto, fill=(0, 0, 0), font=fonte)  # Cor do texto: preto
 
-    <script>
-        // Alguma interação simples para dar a sensação de desafio
-        setTimeout(function() {
-            alert("Você encontrou a dica! Explore o código-fonte!");
-        }, 2000);
-    </script>
-</body>
-</html>
+# Salva a imagem
+imagem.save('flag_imagem.png')
+
+# Mostra a imagem gerada
+imagem.show()
